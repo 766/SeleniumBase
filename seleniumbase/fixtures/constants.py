@@ -1,5 +1,5 @@
 """
-This class containts some frequently-used constants
+SeleniumBase constants are stored in this file.
 """
 
 
@@ -17,6 +17,10 @@ class Environment:
 class Files:
     DOWNLOADS_FOLDER = "downloaded_files"
     ARCHIVED_DOWNLOADS_FOLDER = "archived_files"
+
+
+class SavedCookies:
+    STORAGE_FOLDER = "saved_cookies"
 
 
 class VisualBaseline:
@@ -41,17 +45,18 @@ class Messenger:
     THEME_FUTURE_JS = ("//cdnjs.cloudflare.com/ajax/libs/"
                        "messenger/%s/js/messenger-theme-future.js" % VER)
     THEME_FLAT_CSS = ("//cdnjs.cloudflare.com/ajax/libs/"
-                      "messenger/%s/css/messenger-theme-flat.css" % VER)
+                      "messenger/%s/css/messenger-theme-flat.min.css" % VER)
     THEME_FUTURE_CSS = ("//cdnjs.cloudflare.com/ajax/libs/"
-                        "messenger/%s/css/messenger-theme-future.css" % VER)
+                        "messenger/%s/css/"
+                        "messenger-theme-future.min.css" % VER)
     THEME_BLOCK_CSS = ("//cdnjs.cloudflare.com/ajax/libs/"
-                       "messenger/%s/css/messenger-theme-block.css" % VER)
+                       "messenger/%s/css/messenger-theme-block.min.css" % VER)
     THEME_AIR_CSS = ("//cdnjs.cloudflare.com/ajax/libs/"
-                     "messenger/%s/css/messenger-theme-air.css" % VER)
+                     "messenger/%s/css/messenger-theme-air.min.css" % VER)
     THEME_ICE_CSS = ("//cdnjs.cloudflare.com/ajax/libs/"
-                     "messenger/%s/css/messenger-theme-ice.css" % VER)
+                     "messenger/%s/css/messenger-theme-ice.min.css" % VER)
     SPINNER_CSS = ("//cdnjs.cloudflare.com/ajax/libs/"
-                   "messenger/%s/css/messenger-spinner.css" % VER)
+                   "messenger/%s/css/messenger-spinner.min.css" % VER)
 
 
 class Underscore:
@@ -64,6 +69,12 @@ class Backbone:
     VER = "1.4.0"
     MIN_JS = ("//cdnjs.cloudflare.com/ajax/libs/"
               "backbone.js/%s/backbone-min.js" % VER)
+
+
+class HtmlInspector:
+    VER = "0.8.2"
+    MIN_JS = ("//cdnjs.cloudflare.com/ajax/libs/"
+              "html-inspector/%s/html-inspector.min.js" % VER)
 
 
 class BootstrapTour:

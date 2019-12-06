@@ -11,30 +11,31 @@ class SeleniumBrowser(Plugin):
     """
     This parser plugin includes the following command-line options for Nose:
     --browser=BROWSER  (The web browser to use.)
-    --cap_file=FILE  (The web browser's desired capabilities to use.)
-    --user_data_dir=DIR  (Set the Chrome user data directory to use.)
+    --cap-file=FILE  (The web browser's desired capabilities to use.)
+    --user-data-dir=DIR  (Set the Chrome user data directory to use.)
     --server=SERVER  (The server / IP address used by the tests.)
     --port=PORT  (The port that's used by the test server.)
     --proxy=SERVER:PORT  (This is the proxy server:port combo used by tests.)
     --agent=STRING  (This designates the web browser's User Agent to use.)
-    --extension_zip=ZIP  (Load a Chrome Extension .zip file, comma-separated.)
-    --extension_dir=DIR  (Load a Chrome Extension directory, comma-separated.)
+    --extension-zip=ZIP  (Load a Chrome Extension .zip file, comma-separated.)
+    --extension-dir=DIR  (Load a Chrome Extension directory, comma-separated.)
     --headless  (The option to run tests headlessly. The default on Linux OS.)
     --headed  (The option to run tests with a GUI on Linux OS.)
-    --start_page=URL  (The starting URL for the web browser when tests begin.)
-    --demo_mode  (The option to visually see test actions as they occur.)
-    --demo_sleep=SECONDS  (The option to wait longer after Demo Mode actions.)
+    --start-page=URL  (The starting URL for the web browser when tests begin.)
+    --slow  (The option to slow down the automation.)
+    --demo  (The option to visually see test actions as they occur.)
+    --demo-sleep=SECONDS  (The option to wait longer after Demo Mode actions.)
     --highlights=NUM  (Number of highlight animations for Demo Mode actions.)
-    --message_duration=SECONDS  (The time length for Messenger alerts.)
-    --check_js  (The option to check for JavaScript errors after page loads.)
-    --ad_block  (The option to block some display ads after page loads.)
-    --verify_delay=SECONDS  (The delay before MasterQA verification checks.)
-    --disable_csp  (This disables the Content Security Policy of websites.)
-    --enable_sync  (The option to enable "Chrome Sync".)
-    --maximize_window  (The option to start with the web browser maximized.)
-    --save_screenshot  (The option to save a screenshot after each test.)
-    --visual_baseline  (Set the visual baseline for Visual/Layout tests.)
-    --timeout_multiplier=MULTIPLIER  (Multiplies the default timeout values.)
+    --message-duration=SECONDS  (The time length for Messenger alerts.)
+    --check-js  (The option to check for JavaScript errors after page loads.)
+    --ad-block  (The option to block some display ads after page loads.)
+    --verify-delay=SECONDS  (The delay before MasterQA verification checks.)
+    --disable-csp  (This disables the Content Security Policy of websites.)
+    --enable-sync  (The option to enable "Chrome Sync".)
+    --maximize-window  (The option to start with the web browser maximized.)
+    --save-screenshot  (The option to save a screenshot after each test.)
+    --visual-baseline  (Set the visual baseline for Visual/Layout tests.)
+    --timeout-multiplier=MULTIPLIER  (Multiplies the default timeout values.)
     """
     name = 'selenium'  # Usage: --with-selenium
 
@@ -147,12 +148,18 @@ class SeleniumBrowser(Plugin):
                     when each test begins.
                     Default: None.""")
         parser.add_option(
+            '--slow_mode', '--slow-mode', '--slow',
+            action="store_true",
+            dest='slow_mode',
+            default=False,
+            help="""Using this slows down the automation.""")
+        parser.add_option(
             '--demo_mode', '--demo-mode', '--demo',
             action="store_true",
             dest='demo_mode',
             default=False,
-            help="""Using this slows down the automation so that
-                    you can see what it's actually doing.""")
+            help="""Using this slows down the automation and lets you
+                    visually see what the tests are actually doing.""")
         parser.add_option(
             '--demo_sleep', '--demo-sleep',
             action='store',
@@ -265,6 +272,7 @@ class SeleniumBrowser(Plugin):
         test.test.extension_dir = self.options.extension_dir
         test.test.proxy_string = self.options.proxy_string
         test.test.user_agent = self.options.user_agent
+        test.test.slow_mode = self.options.slow_mode
         test.test.demo_mode = self.options.demo_mode
         test.test.demo_sleep = self.options.demo_sleep
         test.test.highlights = self.options.highlights
@@ -279,6 +287,7 @@ class SeleniumBrowser(Plugin):
         test.test.visual_baseline = self.options.visual_baseline
         test.test.timeout_multiplier = self.options.timeout_multiplier
         test.test.use_grid = False
+        test.test._reuse_session = False
         if test.test.servername != "localhost":
             # Use Selenium Grid (Use --server=127.0.0.1 for localhost Grid)
             test.test.use_grid = True

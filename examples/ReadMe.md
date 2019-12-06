@@ -1,8 +1,8 @@
-## Running SeleniumBase Scripts
+[<img src="https://cdn2.hubspot.net/hubfs/100006/images/sb_logo_d.png" title="SeleniumBase" align="center" height="155">](https://github.com/seleniumbase/SeleniumBase/blob/master/README.md)
 
-To run tests, make sure you've already installed SeleniumBase using ``pip install seleniumbase`` OR ``pip install -r requirements.txt`` + ``python setup.py install`` from the top-level directory.
+## Running Tests
 
-You can interchange **pytest** with **nosetests**, but using pytest is strongly recommended because developers stopped supporting nosetests. Chrome is the default browser if not specified.
+SeleniumBase tests can be run with either **pytest** or **nosetests**, but using pytest is strongly recommended. Chrome is the default browser if not specified.
 
 During test failures, logs and screenshots from the most recent test run will get saved to the ``latest_logs/`` folder. Those logs will get moved to ``archived_logs/`` if you have ARCHIVE_EXISTING_LOGS set to True in [settings.py](https://github.com/seleniumbase/SeleniumBase/blob/master/seleniumbase/config/settings.py)
 
@@ -10,9 +10,9 @@ During test failures, logs and screenshots from the most recent test run will ge
 
 **Here are some example run commands to help get you started:**
 
-Run an example test in Chrome (it's the default browser when not specified):
+Run an example test in Chrome (``--browser=chrome`` is the default):
 ```bash
-pytest my_first_test.py --browser=chrome
+pytest my_first_test.py
 ```
 
 Run an example test in Firefox:
@@ -22,7 +22,7 @@ pytest my_first_test.py --browser=firefox
 
 Run an example test in Demo Mode (highlights page objects being acted on):
 ```bash
-pytest my_first_test.py --demo_mode
+pytest my_first_test.py --demo
 ```
 
 Run an example test demonstrating parameterization:
@@ -37,7 +37,7 @@ pytest test_suite.py --html=report.html
 
 Run an example test suite and generate a nosetest report: (nosetests-only)
 ```bash
-nosetests test_suite.py --report --show_report
+nosetests test_suite.py --report --show-report
 ```
 
 Run an example test using a nosetest configuration file: (nosetests-only)
@@ -60,6 +60,11 @@ Run a failing test with Debugging-mode enabled: (If a test failure occurs, pdb a
 pytest test_fail.py --pdb -s
 ```
 
+Run an example test suite that reuses the browser session between tests:
+```bash
+pytest test_suite.py --reuse-session
+```
+
 Run an example test suite that demonstrates the use of pytest markers:
 ```bash
 pytest -v -m marker_test_suite
@@ -74,7 +79,7 @@ For more advanced run commands, such as using a proxy server, see [../help_docs/
 
 --------
 
-To makes things easier, here's a simple GUI program that allows you to run a few example scripts by pressing a button:
+To make things easier, here's a simple GUI program that allows you to run a few example tests by pressing a button:
 
 ```bash
 python gui_test_runner.py

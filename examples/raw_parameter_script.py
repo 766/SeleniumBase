@@ -42,6 +42,7 @@ except (ImportError, ValueError):
     sb.archive_logs = False
     sb.disable_csp = False
     sb.enable_sync = False
+    sb._reuse_session = False
     sb.visual_baseline = False
     sb.maximize_option = False
     sb.save_screenshot_after_test = False
@@ -52,6 +53,7 @@ except (ImportError, ValueError):
     sb.with_s3_logging = False
     sb.js_checking_on = False
     sb.is_pytest = False
+    sb.slow_mode = False
     sb.demo_mode = False
     sb.demo_sleep = 1
     sb.message_duration = 2
